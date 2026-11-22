@@ -22,4 +22,10 @@
     <ProjectReference Include="..\..\src\SensorCorrelation\SensorCorrelation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\data\Samples\*"
+          Link="data\Samples\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

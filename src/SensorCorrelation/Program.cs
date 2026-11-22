@@ -22,3 +22,17 @@ else
 
     Console.WriteLine($"Distance (CSV 56 to JSON 46): {distance:F2} metres");
 }
+
+const double thresholdMeters = 200;
+var candidateCount = sensor1.Sum(reading1 => sensor2.Count(reading2 =>
+    Geo.DistanceMeters(
+        reading1.Latitude, reading1.Longitude,
+        reading2.Latitude, reading2.Longitude) <= thresholdMeters));
+var matches = SensorMatcher.Match(sensor1, sensor2, thresholdMeters);
+
+Console.WriteLine($"Candidates within {thresholdMeters} metres: {candidateCount}");
+Console.WriteLine($"Matched pairs: {matches.Count}");
+foreach (var match in matches)
+{
+    Console.WriteLine($"{match.Sensor1Id} -> {match.Sensor2Id}");
+}
